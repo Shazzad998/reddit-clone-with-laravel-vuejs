@@ -39,9 +39,9 @@ const showingNavigationDropdown = ref(false);
                                 </BreezeNavLink>
 
                                 <BreezeNavLink
-                                    :href="route('communities.create')"
+                                    :href="route('communities.index')"
                                     :active="
-                                        route().current('communities.create')
+                                        route().current('communities.index')
                                     "
                                 >
                                     Communities
@@ -150,8 +150,8 @@ const showingNavigationDropdown = ref(false);
                         </BreezeResponsiveNavLink>
 
                         <BreezeResponsiveNavLink
-                            :href="route('communities.create')"
-                            :active="route().current('communities.create')"
+                            :href="route('communities.index')"
+                            :active="route().current('communities.index')"
                         >
                             Communities
                         </BreezeResponsiveNavLink>
