@@ -18,7 +18,11 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        $communities = Community::paginate(10);
+        $communities = Community::paginate(3)->through(fn($community)=>[
+            'id' => $community->id,
+            'name' => $community->name,
+            'slug' => $community->slug
+        ]);
         return Inertia::render('Communities/Index', compact('communities'));
     }
 
@@ -42,7 +46,7 @@ class CommunityController extends Controller
     {
         Community::create($request->validated() + ['user_id' => auth()->id()]);
 
-        return to_route('communities.index');
+        return to_route('communities.index')->with('message', 'Community created successfully');
     }
 
     /**
@@ -78,7 +82,7 @@ class CommunityController extends Controller
     {
         $community->update($request->validated());
 
-        return to_route('communities.index');
+        return to_route('communities.index')->with('message', 'Community updated successfully');
     }
 
     /**
@@ -87,8 +91,9 @@ class CommunityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Community $community)
     {
-        //
+        $community->delete();
+        return back()->with('message', 'Community deleted successfully');
     }
 }

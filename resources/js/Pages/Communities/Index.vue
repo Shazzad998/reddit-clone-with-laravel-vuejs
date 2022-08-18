@@ -36,9 +36,7 @@
                                         >
                                             <th class="px-4 py-3">Name</th>
                                             <th class="px-4 py-3">Slug</th>
-                                            <th class="px-4 py-3">
-                                                Description
-                                            </th>
+
                                             <th class="px-4 py-3">Actions</th>
                                         </tr>
                                     </thead>
@@ -54,10 +52,6 @@
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 {{ community.slug }}
-                                            </td>
-
-                                            <td class="px-4 py-3">
-                                                {{ community.description }}
                                             </td>
 
                                             <td class="px-4 py-3">
@@ -85,9 +79,17 @@
                                                             ></path>
                                                         </svg>
                                                     </Link>
-                                                    <button
+                                                    <Link
                                                         class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-gray-600 rounded-lg focus:outline-none focus:shadow-outline-gray"
                                                         aria-label="Delete"
+                                                        :href="
+                                                            route(
+                                                                'communities.destroy',
+                                                                community.id
+                                                            )
+                                                        "
+                                                        method="delete"
+                                                        as="button"
                                                     >
                                                         <svg
                                                             class="w-5 h-5"
@@ -101,7 +103,7 @@
                                                                 clip-rule="evenodd"
                                                             ></path>
                                                         </svg>
-                                                    </button>
+                                                    </Link>
                                                 </div>
                                             </td>
                                         </tr>
@@ -119,97 +121,7 @@
                                 </span>
                                 <span class="col-span-2"></span>
                                 <!-- Pagination -->
-                                <span
-                                    class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end"
-                                >
-                                    <nav aria-label="Table navigation">
-                                        <ul class="inline-flex items-center">
-                                            <li>
-                                                <button
-                                                    class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-gray"
-                                                    aria-label="Previous"
-                                                >
-                                                    <svg
-                                                        class="w-4 h-4 fill-current"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 20 20"
-                                                    >
-                                                        <path
-                                                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                            clip-rule="evenodd"
-                                                            fill-rule="evenodd"
-                                                        ></path>
-                                                    </svg>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-gray"
-                                                >
-                                                    1
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-gray"
-                                                >
-                                                    2
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    class="px-3 py-1 text-white transition-colors duration-150 bg-gray-600 border border-r-0 border-gray-600 rounded-md focus:outline-none focus:shadow-outline-gray"
-                                                >
-                                                    3
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-gray"
-                                                >
-                                                    4
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <span class="px-3 py-1"
-                                                    >...</span
-                                                >
-                                            </li>
-                                            <li>
-                                                <button
-                                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-gray"
-                                                >
-                                                    8
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-gray"
-                                                >
-                                                    9
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-gray"
-                                                    aria-label="Next"
-                                                >
-                                                    <svg
-                                                        class="w-4 h-4 fill-current"
-                                                        aria-hidden="true"
-                                                        viewBox="0 0 20 20"
-                                                    >
-                                                        <path
-                                                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                            clip-rule="evenodd"
-                                                            fill-rule="evenodd"
-                                                        ></path>
-                                                    </svg>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </span>
+                                <Pagination :links="communities.links" />
                             </div>
                         </div>
                     </div>
@@ -220,8 +132,9 @@
 </template>
 
 <script setup>
-import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/inertia-vue3";
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 defineProps({
     communities: Object,
