@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommunityStoreRequest;
+use App\Http\Requests\CommunityUpdateRequest;
 use App\Models\Community;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,7 +18,7 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        $communities = Community::all();
+        $communities = Community::paginate(10);
         return Inertia::render('Communities/Index', compact('communities'));
     }
 
@@ -61,9 +62,9 @@ class CommunityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Community $community)
     {
-        //
+        return Inertia::render('Communities/Edit', compact('community'));
     }
 
     /**
@@ -73,9 +74,11 @@ class CommunityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CommunityUpdateRequest $request, Community $community)
     {
-        //
+        $community->update($request->validated());
+
+        return to_route('communities.index');
     }
 
     /**

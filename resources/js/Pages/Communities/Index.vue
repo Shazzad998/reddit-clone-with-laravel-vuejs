@@ -42,10 +42,11 @@
                                             <th class="px-4 py-3">Actions</th>
                                         </tr>
                                     </thead>
+
                                     <tbody class="bg-white divide-y">
                                         <tr
                                             class="text-gray-700"
-                                            v-for="community in communities"
+                                            v-for="community in communities.data"
                                             :key="community.id"
                                         >
                                             <td class="px-4 py-3">
@@ -63,9 +64,15 @@
                                                 <div
                                                     class="flex items-center space-x-4 text-sm"
                                                 >
-                                                    <button
+                                                    <Link
                                                         class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-gray-600 rounded-lg focus:outline-none focus:shadow-outline-gray"
                                                         aria-label="Edit"
+                                                        :href="
+                                                            route(
+                                                                'communities.edit',
+                                                                community.id
+                                                            )
+                                                        "
                                                     >
                                                         <svg
                                                             class="w-5 h-5"
@@ -77,7 +84,7 @@
                                                                 d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
                                                             ></path>
                                                         </svg>
-                                                    </button>
+                                                    </Link>
                                                     <button
                                                         class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-gray-600 rounded-lg focus:outline-none focus:shadow-outline-gray"
                                                         aria-label="Delete"
@@ -105,7 +112,10 @@
                                 class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t bg-gray-50 sm:grid-cols-9"
                             >
                                 <span class="flex items-center col-span-3">
-                                    Showing 21-30 of 100
+                                    Showing {{ communities.from }}-{{
+                                        communities.to
+                                    }}
+                                    of {{ communities.total }}
                                 </span>
                                 <span class="col-span-2"></span>
                                 <!-- Pagination -->

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CommunityStoreRequest extends FormRequest
+class CommunityUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,8 @@ class CommunityStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:communities',
-
+            'name' => 'required|string|unique:communities,name,'.$this->id,
             'description' => 'required|min:8'
-
         ];
     }
 }
