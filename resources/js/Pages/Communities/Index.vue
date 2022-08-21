@@ -51,7 +51,7 @@
                                                 <Link
                                                     :href="
                                                         route(
-                                                            'subreddit.show',
+                                                            'frontend.communities.show',
                                                             community.slug
                                                         )
                                                     "

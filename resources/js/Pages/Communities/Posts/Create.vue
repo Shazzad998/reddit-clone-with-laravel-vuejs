@@ -8,23 +8,29 @@ import BreezeInputError from "@/Components/InputError.vue";
 import BreezeLabel from "@/Components/Label.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 
+const props = defineProps({
+    community: Object,
+});
+
 const form = useForm({
-    name: "",
+    title: "",
+    description: "",
+    url: "",
     description: "",
 });
 
 const submit = () => {
-    form.post(route("communities.store"));
+    form.post(route("communities.posts.store", props.community.slug));
 };
 </script>
 
 <template>
-    <Head title="Communities-Create" />
+    <Head title="Communities" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Communities Create
+                Create Post for {{ community.name }}
             </h2>
         </template>
 
@@ -34,18 +40,33 @@ const submit = () => {
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form @submit.prevent="submit">
                             <div>
-                                <BreezeLabel for="name" value="Name" />
+                                <BreezeLabel for="title" value="Title" />
                                 <BreezeInput
-                                    id="name"
+                                    id="title"
                                     type="text"
                                     class="mt-1 block w-full"
-                                    v-model="form.name"
+                                    v-model="form.title"
                                     autofocus
-                                    autocomplete="name"
+                                    autocomplete="title"
                                 />
                                 <BreezeInputError
                                     class="mt-2"
-                                    :message="form.errors.name"
+                                    :message="form.errors.title"
+                                />
+                            </div>
+
+                            <div class="mt-4">
+                                <BreezeLabel for="url" value="URL" />
+                                <BreezeInput
+                                    id="url"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    v-model="form.url"
+                                    autocomplete="url"
+                                />
+                                <BreezeInputError
+                                    class="mt-2"
+                                    :message="form.errors.url"
                                 />
                             </div>
 
