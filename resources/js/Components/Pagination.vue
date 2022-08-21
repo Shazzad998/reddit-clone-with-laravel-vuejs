@@ -4,10 +4,10 @@
             <ul class="inline-flex items-center">
                 <li v-for="link in links" :key="link.id">
                     <Link
-                        class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-gray"
+                        class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-gray disabled:text-gray-500"
                         :class="[
                             link.active
-                                ? 'px-3 py-1 text-white transition-colors duration-150 bg-gray-600 border border-r-0 border-gray-600 rounded-md focus:outline-none focus:shadow-outline-gray'
+                                ? 'px-3 py-1 text-white transition-colors  duration-150 bg-gray-800 border border-r-0 border-gray-800 rounded-md focus:outline-none focus:shadow-outline-gray'
                                 : '',
                         ]"
                         :href="link.url"
