@@ -48,7 +48,16 @@
                                             :key="community.id"
                                         >
                                             <td class="px-4 py-3">
-                                                {{ community.name }}
+                                                <Link
+                                                    :href="
+                                                        route(
+                                                            'subreddit.show',
+                                                            community.slug
+                                                        )
+                                                    "
+                                                >
+                                                    {{ community.name }}
+                                                </Link>
                                             </td>
                                             <td class="px-4 py-3 text-sm">
                                                 {{ community.slug }}
