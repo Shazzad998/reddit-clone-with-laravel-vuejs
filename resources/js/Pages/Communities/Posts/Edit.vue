@@ -10,26 +10,32 @@ import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 
 const props = defineProps({
     community: Object,
+    post: Object,
 });
 
 const form = useForm({
-    title: "",
-    description: "",
-    url: "",
+    title: props.post?.title,
+    description: props.post?.description,
+    url: props.post?.url,
 });
 
 const submit = () => {
-    form.post(route("communities.posts.store", props.community.slug));
+    form.put(
+        route("communities.posts.update", [
+            props.community.slug,
+            props.post.slug,
+        ])
+    );
 };
 </script>
 
 <template>
-    <Head title="Communities" />
+    <Head :title="community.name" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create Post for {{ community.name }}
+                Edit Post
             </h2>
         </template>
 
@@ -93,7 +99,7 @@ const submit = () => {
                                     :class="{ 'opacity-25': form.processing }"
                                     :disabled="form.processing"
                                 >
-                                    Save
+                                    Update
                                 </BreezeButton>
                             </div>
                         </form>

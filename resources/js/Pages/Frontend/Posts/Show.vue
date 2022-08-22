@@ -3,8 +3,126 @@
     <GuestLayout>
         <section class="grid grid-cols-1 lg:grid-cols-12 gap-4">
             <div class="flex flex-col gap-6 lg:col-span-8">
-                <h1>{{ post.title }}</h1>
-                Post details
+                <div>
+                    <h1
+                        class="font-semibold text-gray-800 text-lg bg-white px-4 py-2 inline-block rounded"
+                    >
+                        <Link
+                            :href="
+                                route(
+                                    'frontend.communities.show',
+                                    community.slug
+                                )
+                            "
+                            class="flex items-center gap-3 text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                            r/{{ community.name }}
+                        </Link>
+                    </h1>
+                </div>
+                <div
+                    class="flex gap-2 md:gap-6 px-2 lg:px-6 py-4 bg-white rounded-lg"
+                >
+                    <div class="flex flex-col">
+                        <button class="font-bold text-sm">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M5 15l7-7 7 7"
+                                />
+                            </svg>
+                        </button>
+                        <span>23K</span>
+                        <button class="font-bold text-sm">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M19 9l-7 7-7-7"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="p-4 w-full">
+                        <div
+                            class="text-gray-500 text-sm flex justify-between items-center"
+                        >
+                            <div>
+                                Posted by
+                                <span
+                                    class="text-gray-800 font-semibold cursor-pointer"
+                                    >{{ post.data.username }}</span
+                                >
+                            </div>
+
+                            <div
+                                class="flex gap-2"
+                                v-if="
+                                    $page.props.auth.is_logged_in &&
+                                    post.data.owner
+                                "
+                            >
+                                <Link
+                                    :href="
+                                        route('communities.posts.edit', [
+                                            community.slug,
+                                            post.data.slug,
+                                        ])
+                                    "
+                                    >Edit</Link
+                                >
+                                <Link
+                                    :href="
+                                        route('communities.posts.destroy', [
+                                            community.slug,
+                                            post.data.slug,
+                                        ])
+                                    "
+                                    method="delete"
+                                    as="button"
+                                    >Delete</Link
+                                >
+                            </div>
+                        </div>
+                        <h1 class="text-2xl md:text-3xl font-semibold">
+                            {{ post.data.title }}
+                        </h1>
+                        <p class="text-gray-700">{{ post.data.description }}</p>
+                        <a
+                            :href="post.data.url"
+                            class="text-blue-500 hover:text-blue-700 block font-medium"
+                            >{{ post.data.url }}</a
+                        >
+                    </div>
+                </div>
             </div>
             <div class="lg:col-span-4">
                 <div

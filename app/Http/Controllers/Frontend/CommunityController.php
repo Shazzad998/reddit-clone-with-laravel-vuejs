@@ -15,7 +15,7 @@ class CommunityController extends Controller
         $community = Community::where('slug', $slug)->first();
 
         if($community){
-            $posts = CommunityPostResource::collection($community->posts()->with('user')->paginate(2));
+            $posts = CommunityPostResource::collection($community->posts()->with('user')->paginate(10));
         }else{
             abort(404);
         }
