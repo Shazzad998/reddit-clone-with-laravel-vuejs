@@ -37,7 +37,7 @@
         </div>
         <div class="py-4">
             <h3 class="pl-4">
-                <span class="font-bold mr-3">r/{{ community }}</span>
+                <span class="font-bold mr-3">r/{{ community.name }}</span>
                 Posted by
                 <span class="font-bold">{{ post.username }}</span>
             </h3>
@@ -51,7 +51,13 @@
             </div>
             <div class="pl-4 mt-4 flex gap-6 items-center">
                 <span class="font-semibold">Comments(2)</span>
-                <button
+                <Link
+                    :href="
+                        route('frontend.communities.posts.show', [
+                            community.slug,
+                            post.slug,
+                        ])
+                    "
                     class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150"
                 >
                     Read more
@@ -67,15 +73,16 @@
                             clip-rule="evenodd"
                         />
                     </svg>
-                </button>
+                </Link>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { Link } from "@inertiajs/inertia-vue3";
 defineProps({
     post: Object,
-    community: String,
+    community: Object,
 });
 </script>
