@@ -26,7 +26,10 @@ const submit = () => {
     <BreezeGuestLayout>
         <Head title="Register" />
 
-        <form @submit.prevent="submit">
+        <form
+            @submit.prevent="submit"
+            class="bg-white max-w-xl px-16 rounded py-16 mx-auto mt-20"
+        >
             <div>
                 <BreezeLabel for="name" value="Name" />
                 <BreezeInput

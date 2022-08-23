@@ -20,17 +20,14 @@ Route::get('/', function () {
 });
 
 
-
+//Public Routes
 Route::get('/r/{slug}', [FrontendCommunityController::class, 'show'])->name('frontend.communities.show');
 Route::get('/r/{community_slug}/posts/{post:slug}',[PostController::class , 'show'])->name('frontend.communities.posts.show');
+
+//Protected Routes
 Route::group(['middleware' => ['auth', 'verified']], function(){
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
-
-    Route::resource('/dashboard/communities', CommunityController::class);
-    Route::resource('/dashboard/communities.posts', CommunityPostController::class);
+    Route::resource('/communities', CommunityController::class);
+    Route::resource('/communities.posts', CommunityPostController::class);
 });
 
 require __DIR__.'/auth.php';

@@ -73,7 +73,7 @@
                                                         :href="
                                                             route(
                                                                 'communities.edit',
-                                                                community.id
+                                                                community.slug
                                                             )
                                                         "
                                                     >
@@ -94,7 +94,7 @@
                                                         :href="
                                                             route(
                                                                 'communities.destroy',
-                                                                community.id
+                                                                community.slug
                                                             )
                                                         "
                                                         method="delete"
