@@ -16,9 +16,36 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin12345')
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'User One',
+            'username' => 'user_one',
+            'email' => 'user_one@gmail.com',
+            'password' => bcrypt('user_one12345')
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'User Two',
+            'username' => 'user_two',
+            'email' => 'user_two@gmail.com',
+            'password' => bcrypt('user_two12345')
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'User Three',
+            'username' => 'user_three',
+            'email' => 'user_three@gmail.com',
+            'password' => bcrypt('user_three12345')
+        ]);
+
+        \App\Models\Community::factory(10)->create();
+        \App\Models\Post::factory(20)->create();
+        \App\Models\Comment::factory(30)->create();
     }
 }

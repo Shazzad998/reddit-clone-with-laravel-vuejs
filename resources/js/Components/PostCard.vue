@@ -1,40 +1,6 @@
 <template>
     <div class="flex gap-6 px-2 lg:px-6 py-4 bg-white rounded-lg">
-        <div class="flex flex-col">
-            <button class="font-bold text-sm">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M5 15l7-7 7 7"
-                    />
-                </svg>
-            </button>
-            <span>23K</span>
-            <button class="font-bold text-sm">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M19 9l-7 7-7-7"
-                    />
-                </svg>
-            </button>
-        </div>
+        <PostVote />
         <div class="py-4">
             <h3 class="pl-4">
                 <span class="font-bold mr-3">r/{{ community.name }}</span>
@@ -81,6 +47,7 @@
 
 <script setup>
 import { Link } from "@inertiajs/inertia-vue3";
+import PostVote from "@/Components/PostVote.vue";
 defineProps({
     post: Object,
     community: Object,
