@@ -1,6 +1,6 @@
 <template>
     <div class="flex gap-6 px-2 lg:px-6 py-4 bg-white rounded-lg">
-        <PostVote />
+        <PostVote :post="post.slug" />
         <div class="py-4">
             <h3 class="pl-4">
                 <span class="font-bold mr-3">r/{{ community.name }}</span>

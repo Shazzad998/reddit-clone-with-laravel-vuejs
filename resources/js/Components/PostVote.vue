@@ -1,6 +1,12 @@
 <template>
     <div class="flex flex-col gap-y-4">
-        <Link href="#" class="font-bold text-sm hover:text-indigo-500">
+        <Link
+            :href="route('post.upVote', post)"
+            method="post"
+            as="button"
+            type="button"
+            class="font-bold text-sm hover:text-indigo-500"
+        >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -17,7 +23,13 @@
             </svg>
         </Link>
         <span>23K</span>
-        <Link href="#" class="font-bold text-sm hover:text-rose-500">
+        <Link
+            :href="route('post.downVote', post)"
+            method="post"
+            as="button"
+            type="button"
+            class="font-bold text-sm hover:text-rose-500"
+        >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -38,4 +50,8 @@
 
 <script setup>
 import { Link } from "@inertiajs/inertia-vue3";
+
+defineProps({
+    post: String,
+});
 </script>

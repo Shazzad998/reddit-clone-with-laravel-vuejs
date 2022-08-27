@@ -34,7 +34,7 @@
                 </div>
                 <div class="px-2 lg:px-6 py-4 bg-white rounded-lg">
                     <div class="flex gap-2 md:gap-6">
-                        <PostVote />
+                        <PostVote :post="post.data.slug" />
 
                         <div class="p-4 w-full">
                             <div

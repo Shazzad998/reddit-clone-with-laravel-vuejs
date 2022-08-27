@@ -31,8 +31,8 @@ Route::post('/r/{community_slug}/posts/{post:slug}/comments',[PostCommentControl
 Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::resource('/communities', CommunityController::class);
     Route::resource('/communities.posts', CommunityPostController::class);
-    Route::post('/posts/{post:slug}/up', [PostVoteController::class , 'upVote'])->name('posts.upVote');
-    Route::post('/posts/{post:slug}/down', [PostVoteController::class , 'downVote'])->name('posts.downVote');
+    Route::post('/posts/{post:slug}/up-vote', [PostVoteController::class , 'upVote'])->name('post.upVote');
+    Route::post('/posts/{post:slug}/down-vote', [PostVoteController::class , 'downVote'])->name('post.downVote');
 });
 
 require __DIR__.'/auth.php';
