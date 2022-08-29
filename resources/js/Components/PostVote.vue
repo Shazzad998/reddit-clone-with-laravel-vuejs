@@ -1,49 +1,38 @@
 <template>
-    <div class="flex flex-col gap-y-4">
+    <div class="flex flex-col items-center gap-y-4">
         <Link
-            :href="route('post.upVote', post)"
+            :href="route('post.upVote', post.slug)"
             method="post"
             as="button"
             type="button"
+            preserve-scroll
             class="font-bold text-sm hover:text-indigo-500"
         >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"
-                />
-            </svg>
+            <i
+                class="bx bx-upvote text-2xl"
+                :class="{
+                    'text-indigo-500':
+                        post.postVotes[0] && post.postVotes[0].vote == 1,
+                }"
+            ></i>
         </Link>
-        <span>23K</span>
+        <span class="font-bold">{{ post.votes }}</span>
+
         <Link
-            :href="route('post.downVote', post)"
+            :href="route('post.downVote', post.slug)"
             method="post"
             as="button"
             type="button"
+            preserve-scroll
             class="font-bold text-sm hover:text-rose-500"
         >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
-                />
-            </svg>
+            <i
+                class="bx bx-downvote text-2xl"
+                :class="{
+                    'text-rose-500':
+                        post.postVotes[0] && post.postVotes[0].vote == -1,
+                }"
+            ></i>
         </Link>
     </div>
 </template>
@@ -52,6 +41,6 @@
 import { Link } from "@inertiajs/inertia-vue3";
 
 defineProps({
-    post: String,
+    post: Object,
 });
 </script>
