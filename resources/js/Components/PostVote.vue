@@ -16,7 +16,16 @@
                 }"
             ></i>
         </Link>
-        <span class="font-bold">{{ post.votes }}</span>
+        <span
+            class="font-bold"
+            :class="{
+                'text-indigo-500':
+                    post.postVotes[0] && post.postVotes[0].vote == 1,
+                'text-rose-500':
+                    post.postVotes[0] && post.postVotes[0].vote == -1,
+            }"
+            >{{ post.votes }}</span
+        >
 
         <Link
             :href="route('post.downVote', post.slug)"
