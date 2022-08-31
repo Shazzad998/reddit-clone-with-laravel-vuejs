@@ -16,7 +16,7 @@
                 </p>
             </div>
             <div class="pl-4 mt-4 flex gap-6 items-center">
-                <span class="font-semibold">Comments(2)</span>
+                <span class="font-semibold">Comments({{ post.comments }})</span>
                 <Link
                     :href="
                         route('frontend.communities.posts.show', [
