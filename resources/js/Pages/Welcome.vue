@@ -12,7 +12,7 @@
             </div>
             <div class="lg:col-span-4">
                 <h1
-                    class="font-semibold text-lg bg-gray-800 px-4 py-4 text-gray-200 font-bold lg:px-8 rounded-t-lg"
+                    class="text-lg bg-gray-800 px-4 py-4 text-gray-200 font-bold lg:px-8 rounded-t-lg"
                 >
                     Top Communities
                 </h1>
