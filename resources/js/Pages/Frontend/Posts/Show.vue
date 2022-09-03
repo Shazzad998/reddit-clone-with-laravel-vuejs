@@ -32,7 +32,7 @@
                         </Link>
                     </h1>
                 </div>
-                <div class="px-2 lg:px-6 py-4 bg-white rounded-lg">
+                <div class="px-2 lg:px-6 py-4 bg-white rounded-lg shadow-lg">
                     <div class="flex gap-2 md:gap-6">
                         <PostVote :post="post.data" />
 
@@ -85,7 +85,7 @@
                             </p>
                             <a
                                 :href="post.data.url"
-                                class="text-blue-500 hover:text-blue-700 block font-medium"
+                                class="text-blue-500 hover:text-blue-700 block font-medium truncate"
                                 >{{ post.data.url }}</a
                             >
                         </div>
@@ -145,21 +145,13 @@
                 </div>
             </div>
             <div class="lg:col-span-4">
-                <div
-                    class="bg-white px-4 lg:px-8 py-6 rounded-lg flex flex-col"
-                >
-                    <h1 class="font-semibold text-lg">
-                        r/{{ community.name }}
-                    </h1>
-                    <p class="mt-2">
-                        People conforming to the letter, but not the spirit, of
-                        a request.
-                    </p>
-                    <button
-                        class="mt-4 text-center py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150"
+                <div class="mt-16">
+                    <SidebarPosts
+                        :posts="posts"
+                        :community_slug="community.slug"
                     >
-                        Join Community
-                    </button>
+                        <template #title> Latest Posts</template>
+                    </SidebarPosts>
                 </div>
             </div>
         </section>
@@ -170,10 +162,12 @@
 import GuestLayout from "@/Layouts/Guest.vue";
 import { Link, Head, useForm } from "@inertiajs/inertia-vue3";
 import PostVote from "@/Components/PostVote.vue";
+import SidebarPosts from "@/Components/SidebarPosts.vue";
 
 const props = defineProps({
     community: Object,
     post: Object,
+    posts: Object,
 });
 
 const form = useForm({

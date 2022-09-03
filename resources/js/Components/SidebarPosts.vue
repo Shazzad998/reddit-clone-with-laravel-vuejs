@@ -9,25 +9,22 @@
             role="list"
             class="divide-y divide-gray-300 bg-white px-4 lg:px-8 py-4 rounded-b-lg shadow-md flex flex-col"
         >
-            <li
-                class="py-3 sm:py-4"
-                v-for="community in communities.data"
-                :key="community.id"
-            >
+            <li class="py-3 sm:py-4" v-for="post in posts.data" :key="post.id">
                 <div class="flex items-center space-x-4">
                     <Link
                         :href="
-                            route('frontend.communities.show', community.slug)
+                            route('frontend.communities.posts.show', [
+                                community_slug,
+                                post.slug,
+                            ])
                         "
                         class="text-gray-800 font-semibold truncate"
                     >
-                        {{ community.name }}
+                        {{ post.title }}
                     </Link>
 
                     <div class="text-gray-500 text-sm font-semibold">
-                        Posts(<span class="text-gray-800">{{
-                            community.posts_count
-                        }}</span
+                        Votes(<span class="text-gray-800">{{ post.votes }}</span
                         >)
                     </div>
                 </div>
@@ -40,6 +37,7 @@
 import { Link } from "@inertiajs/inertia-vue3";
 
 defineProps({
-    communities: Object,
+    posts: Object,
+    community_slug: String,
 });
 </script>

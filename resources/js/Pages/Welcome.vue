@@ -11,16 +11,9 @@
                 />
             </div>
             <div class="lg:col-span-4">
-                <h1
-                    class="text-lg bg-gray-800 px-4 py-4 text-gray-200 font-bold lg:px-8 rounded-t-lg"
-                >
-                    Top Communities
-                </h1>
-                <div
-                    class="bg-white px-4 lg:px-8 py-4 rounded-b-lg shadow-md flex flex-col"
-                >
-                    <SidebarCommunities :communities="communities" />
-                </div>
+                <SidebarCommunities :communities="communities">
+                    <template #title> Top Communities</template>
+                </SidebarCommunities>
             </div>
         </section>
     </GuestLayout>

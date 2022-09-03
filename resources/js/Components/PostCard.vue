@@ -3,14 +3,26 @@
         <PostVote :post="post" />
         <div class="py-4">
             <h3 class="pl-4">
-                <span class="font-bold mr-3">r/{{ community.name }}</span>
+                <Link
+                    :href="route('frontend.communities.show', community.slug)"
+                    class="font-bold mr-3"
+                    >r/{{ community.name }}</Link
+                >
                 Posted by
                 <span class="font-bold">{{ post.username }}</span>
             </h3>
             <div class="mt-4">
-                <h1 class="text-xl lg:text-2xl font-bold">
+                <Link
+                    :href="
+                        route('frontend.communities.posts.show', [
+                            community.slug,
+                            post.slug,
+                        ])
+                    "
+                    class="text-xl lg:text-2xl font-bold"
+                >
                     {{ post.title }}
-                </h1>
+                </Link>
                 <p class="font-medium text-gray-700">
                     {{ post.description }}
                 </p>
