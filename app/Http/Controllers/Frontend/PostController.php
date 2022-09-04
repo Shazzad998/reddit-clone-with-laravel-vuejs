@@ -13,17 +13,23 @@ use Inertia\Inertia;
 class PostController extends Controller
 {
 
-    public function show($community_slug, $slug)
+    public function show($community_slug, $slug, Request $request)
     {
 
 
         $community = Community::where('slug', $community_slug)->first();
-        $post = new PostShowResource(Post::with(['comments', 'postVotes' => function ($query) {
+
+        $community_post = Post::with(['comments', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->where('slug', $slug)->first());
+        }])->where('slug', $slug)->first();
+
+        $post = new PostShowResource($community_post);
 
         $posts = PostResource::collection($community->posts()->orderBy('votes', 'DESC')->take(5)->get());
 
-        return Inertia::render('Frontend/Posts/Show', compact('community', 'post', 'posts'));
+        $can_edit = $request->user()->can('update', $community_post);
+        $can_delete = $request->user()->can('delete', $community_post);
+
+        return Inertia::render('Frontend/Posts/Show', compact('community', 'post', 'posts', 'can_edit', 'can_delete'));
     }
 }

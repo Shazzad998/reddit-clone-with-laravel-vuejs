@@ -49,13 +49,11 @@
                                 </div>
 
                                 <div
-                                    class="flex gap-2"
-                                    v-if="
-                                        $page.props.auth.is_logged_in &&
-                                        post.data.owner
-                                    "
+                                    class="flex gap-2 mb-4"
+                                    v-if="$page.props.auth.is_logged_in"
                                 >
                                     <Link
+                                        v-if="can_edit"
                                         :href="
                                             route('communities.posts.edit', [
                                                 community.slug,
@@ -65,6 +63,7 @@
                                         >Edit</Link
                                     >
                                     <Link
+                                        v-if="can_delete"
                                         :href="
                                             route('communities.posts.destroy', [
                                                 community.slug,
@@ -168,6 +167,8 @@ const props = defineProps({
     community: Object,
     post: Object,
     posts: Object,
+    can_edit: Boolean,
+    can_delete: Boolean,
 });
 
 const form = useForm({
