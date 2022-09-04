@@ -44,8 +44,8 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('user_three12345')
         ]);
 
-        \App\Models\Community::factory(10)->create();
-        \App\Models\Post::factory(20)->create();
-        \App\Models\Comment::factory(30)->create();
+        \App\Models\Community::factory(50)->create();
+        \App\Models\Post::factory(500)->create();
+        \App\Models\Comment::factory(1000)->create();
     }
 }

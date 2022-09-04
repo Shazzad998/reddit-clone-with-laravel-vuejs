@@ -18,7 +18,7 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        $communities = Community::where('user_id', auth()->id())->paginate(3)->through(fn($community)=>[
+        $communities = Community::where('user_id', auth()->id())->paginate(10)->through(fn ($community) => [
             'id' => $community->id,
             'name' => $community->name,
             'slug' => $community->slug
