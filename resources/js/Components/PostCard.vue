@@ -10,6 +10,9 @@
                 >
                 Posted by
                 <span class="font-bold">{{ post.username }}</span>
+                <span class="ml-3 text-xs font-semibold text-gray-500">{{
+                    post.created_at
+                }}</span>
             </h3>
             <div class="mt-4">
                 <Link

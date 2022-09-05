@@ -38,7 +38,7 @@
 
                         <div class="p-4 w-full">
                             <div
-                                class="text-gray-500 text-sm flex justify-between items-center"
+                                class="text-gray-500 text-sm flex justify-between items-center mb-4"
                             >
                                 <div>
                                     Posted by
@@ -46,10 +46,14 @@
                                         class="text-gray-800 font-semibold cursor-pointer"
                                         >{{ post.data.username }}</span
                                     >
+                                    <span
+                                        class="ml-3 text-xs font-semibold text-gray-500"
+                                        >{{ post.data.created_at }}</span
+                                    >
                                 </div>
 
                                 <div
-                                    class="flex gap-2 mb-4"
+                                    class="flex gap-2"
                                     v-if="$page.props.auth.is_logged_in"
                                 >
                                     <Link
@@ -90,8 +94,8 @@
                         </div>
                     </div>
 
-                    <hr />
-                    <div>
+                    <div v-if="post.data.comments.length > 0">
+                        <hr />
                         <ul role="list" class="divide-y divide-gray-200">
                             <li
                                 class="py-4 flex flex-col"
@@ -112,8 +116,9 @@
                             </li>
                         </ul>
                     </div>
-                    <hr class="my-6" />
+
                     <div class="mt-8" v-if="$page.props.auth.is_logged_in">
+                        <hr class="my-6" />
                         <form @submit.prevent="submit">
                             <div>
                                 <label

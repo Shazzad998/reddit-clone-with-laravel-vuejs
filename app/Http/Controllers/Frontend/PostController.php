@@ -27,8 +27,8 @@ class PostController extends Controller
 
         $posts = PostResource::collection($community->posts()->orderBy('votes', 'DESC')->take(5)->get());
 
-        $can_edit = $request->user()->can('update', $community_post);
-        $can_delete = $request->user()->can('delete', $community_post);
+        $can_edit = $request->user() ? $request->user()->can('update', $community_post) : false;
+        $can_delete = $request->user() ? $request->user()->can('delete', $community_post) : false;
 
         return Inertia::render('Frontend/Posts/Show', compact('community', 'post', 'posts', 'can_edit', 'can_delete'));
     }

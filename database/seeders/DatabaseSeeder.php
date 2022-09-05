@@ -3,6 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Comment;
+use App\Models\Community;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +19,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@gmail.com',
@@ -24,29 +29,27 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('admin12345')
         ]);
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'User One',
             'username' => 'user_one',
-            'email' => 'user_one@gmail.com',
-            'password' => bcrypt('user_one12345')
+            'email' => 'user1@gmail.com',
+            'password' => bcrypt('password')
         ]);
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'User Two',
             'username' => 'user_two',
-            'email' => 'user_two@gmail.com',
-            'password' => bcrypt('user_two12345')
+            'email' => 'user2@gmail.com',
+            'password' => bcrypt('password')
         ]);
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'User Three',
             'username' => 'user_three',
-            'email' => 'user_three@gmail.com',
-            'password' => bcrypt('user_three12345')
+            'email' => 'user3@gmail.com',
+            'password' => bcrypt('password')
         ]);
 
-        \App\Models\Community::factory(50)->create();
-        \App\Models\Post::factory(500)->create();
-        \App\Models\Comment::factory(1000)->create();
+        Community::factory(50)->has(Post::factory(50)->has(Comment::factory(5)))->create();;
     }
 }
