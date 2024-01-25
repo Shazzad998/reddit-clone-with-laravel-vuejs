@@ -50,6 +50,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password')
         ]);
 
-        Community::factory(50)->has(Post::factory(50)->has(Comment::factory(5)))->create();;
+        // Community::factory(50)->has(Post::factory(50)->has(Comment::factory(5)))->create();
     }
 }

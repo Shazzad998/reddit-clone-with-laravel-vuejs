@@ -19,7 +19,7 @@ class CommunityController extends Controller
 
         $posts = CommunityPostResource::collection($community->posts()->with(['user', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->withCount('comments')->paginate(10));
+        }])->withCount('comments')->latest()->paginate(10));
 
         $communities = CommunityResource::collection(Community::withCount('posts')->latest()->take(5)->get());
 
